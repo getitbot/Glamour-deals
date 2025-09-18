@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glamour Deals - Curated Beauty & Skincare Offers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+     crossorigin="anonymous"></script>
+
+    <style>
+        body { font-family: 'Lato', sans-serif; background-color: #FFFBF5; color: #4B423B; }
+        .font-heading { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Lato', sans-serif; }
+        .gradient-text { background: linear-gradient(to right, #B78692, #A67B5B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .coupon-code { border: 1px solid #EADED7; background-color: #FFFCF9; }
+        .buy-link {
+            display: none; /* Initially hidden */
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+        }
+        .buy-link.visible {
+            display: block; /* Use block for full width */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card-hover-effect { transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
+        .card-hover-effect:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        #gift-modal-overlay { transition: opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-10 shadow-sm">
+        <div class="container mx-auto px-6 py-5 text-center">
+            <h1 class="text-4xl md:text-5xl font-heading gradient-text">Glamour Deals</h1>
+            <p class="mt-2 text-lg text-gray-500">Curated offers for the modern beauty enthusiast.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+            <!-- Products and Ad Slots will be injected here by JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-transparent mt-12 py-6">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 Glamour Deals. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Gift Button -->
+    <button id="gift-button" class="fixed bottom-8 right-8 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition-transform" style="background-color: #B78692;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>
+    </button>
+    
+    <!-- Gift Modal -->
+    <div id="gift-modal-overlay" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
+        <div id="gift-modal" class="bg-white rounded-2xl p-8 m-4 max-w-sm w-full text-center relative shadow-2xl">
+            <button id="close-modal" class="absolute top-3 right-4 text-3xl font-bold text-gray-400 hover:text-gray-600">&times;</button>
+            <h2 class="font-heading text-3xl gradient-text">A Special Gift!</h2>
+            <p class="text-gray-600 mt-2">You've unlocked our biggest coupon of the day!</p>
+            <div class="mt-6">
+                <p class="text-5xl font-heading" style="color: #A67B5B;"><span class="font-sans">₹</span>7999<span class="text-xl font-sans"> OFF</span></p>
+                <div class="coupon-code text-gray-600 font-mono tracking-widest py-3 px-4 rounded-lg my-4 text-lg">GLAM7999</div>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <button data-coupon="GLAM7999" class="copy-button w-full text-white font-bold py-3 px-4 rounded-lg transition-all duration-300" style="background-color: #B78692;">Copy Code</button>
+                    <a href="#" id="modal-whatsapp-link" target="_blank" rel="noopener noreferrer" class="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.651 4.383 1.893 6.262l-1.205 4.409 4.463-1.162z"/></svg>
+                        Share
+                    </a>
+                </div>
+                <a href="https://amzn.to/4navVMF" target="_blank" rel="noopener noreferrer" class="buy-link mt-3 w-full bg-gray-700 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-800">Buy on Amazon</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-10 right-10 bg-gray-800 text-white py-3 px-6 rounded-lg shadow-xl transition-all duration-300 transform translate-y-4 opacity-0 z-50">
+        Code copied to clipboard!
+    </div>
+
+    <script>
+        const products = [
+            { name: "Radiant Glow Serum", description: "A vitamin C serum for brighter skin.", couponValue: 500, amazonLink: "https://amzn.to/41XiCGQ" },
+            { name: "Hydrating Night Cream", description: "Wake up to moisturized, supple skin.", couponValue: 700, amazonLink: "https://amzn.to/4pxIgfu" },
+            { name: "Matte Finish Foundation", description: "Long-lasting, full-coverage foundation.", couponValue: 259, amazonLink: "https://amzn.to/4prgxwP" },
+            { name: "Pro Makeup Brush Set", description: "A complete set of 12 professional brushes.", couponValue: 1500, amazonLink: "https://amzn.to/4mozIVr" },
+            { name: "Advanced Hair Dryer", description: "Ionic technology for faster, frizz-free drying.", couponValue: 3500, amazonLink: "https://amzn.to/4pta9Fi" },
+            { name: "Velvet Matte Lipstick", description: "A creamy, non-drying lipstick in bold red.", couponValue: 800, amazonLink: "https://amzn.to/3Ie4TEX" },
+            { name: "Soothing Gel Cleanser", description: "Gently removes impurities without stripping skin.", couponValue: 699, amazonLink: "https://amzn.to/4navVMF" },
+            { name: "Eyeshadow Palette (Nude)", description: "18 versatile shades for day-to-night looks.", couponValue: 599, amazonLink: "https://amzn.to/3Im5CUz" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const productGrid = document.getElementById('product-grid');
+            
+            // Populate Product Cards
+            products.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl shadow-lg overflow-hidden card-hover-effect flex flex-col text-center';
+                const couponCode = `GLAM${product.couponValue}`;
+
+                // Create pre-written WhatsApp message
+                const message = `Hey! I found an amazing deal on Glamour Deals for the "${product.name}". You can get ₹${product.couponValue} off with the code *${couponCode}*. Check it out here: ${product.amazonLink}`;
+                const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+
+                card.innerHTML = `
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-heading text-gray-800">${product.name}</h3>
+                        <p class="text-gray-500 mt-2 flex-grow">${product.description}</p>
+                        <div class="mt-6">
+                            <p class="text-sm text-gray-400 mb-1">Exclusive Discount</p>
+                            <p class="text-4xl font-heading" style="color: #A67B5B;"><span class="font-sans">₹</span>${product.couponValue}<span class="text-lg font-sans"> OFF</span></p>
+                            <div class="coupon-code text-gray-600 font-mono tracking-widest py-3 px-4 rounded-lg my-4">${couponCode}</div>
+                            <div class="flex flex-col sm:flex-row gap-2">
+                                <button data-coupon="${couponCode}" class="copy-button w-full text-white font-bold py-3 px-4 rounded-lg transition-all duration-300" style="background-color: #B78692;">Copy Code</button>
+                                <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.651 4.383 1.893 6.262l-1.205 4.409 4.463-1.162z"/></svg>
+                                    Share
+                                </a>
+                            </div>
+                            <a href="${product.amazonLink}" target="_blank" rel="noopener noreferrer" class="buy-link mt-3 w-full bg-gray-700 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-800">Buy on Amazon</a>
+                        </div>
+                    </div>`;
+                productGrid.appendChild(card);
+
+                // Add AdSense slot after every 4th product
+                if ((index + 1) % 4 === 0 && index < products.length - 1) {
+                    const adSlot = document.createElement('div');
+                    adSlot.className = 'col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 w-full h-48 bg-gray-200/50 flex items-center justify-center text-gray-400 rounded-2xl my-5';
+                    adSlot.innerHTML = `<div class="text-center p-4"><p class="font-sans text-sm mb-2">Advertisement</p><!-- Paste AdSense Code Here --></div>`;
+                    productGrid.appendChild(adSlot);
+                }
+            });
+
+            // --- Set up all event listeners after creating the content ---
+            document.querySelectorAll('.copy-button').forEach(button => {
+                button.addEventListener('click', handleCopyClick);
+            });
+
+            // Gift Modal Logic
+            const giftButton = document.getElementById('gift-button');
+            const giftModalOverlay = document.getElementById('gift-modal-overlay');
+            const closeModal = document.getElementById('close-modal');
+            
+            // Set up WhatsApp link for the modal
+            const modalCoupon = "GLAM7999";
+            const modalValue = "7999";
+            const modalAmazonLink = "https://amzn.to/4navVMF";
+            const modalMessage = `OMG! I just unlocked a special gift on Glamour Deals! A ₹${modalValue} discount with code *${modalCoupon}*. You have to check this site out! Get the deal here: ${modalAmazonLink}`;
+            document.getElementById('modal-whatsapp-link').href = `https://wa.me/?text=${encodeURIComponent(modalMessage)}`;
+
+            giftButton.addEventListener('click', () => {
+                giftModalOverlay.classList.remove('hidden');
+                giftModalOverlay.classList.add('flex');
+            });
+            const hideModal = () => {
+                giftModalOverlay.classList.add('hidden');
+                giftModalOverlay.classList.remove('flex');
+            };
+            closeModal.addEventListener('click', hideModal);
+            giftModalOverlay.addEventListener('click', (event) => {
+                if (event.target === giftModalOverlay) hideModal();
+            });
+        });
+
+        function handleCopyClick(event) {
+            const button = event.currentTarget;
+            const coupon = button.dataset.coupon;
+
+            // Find the "Buy" link. It is the next sibling of the buttons' container div.
+            const buyLink = button.parentElement.nextElementSibling;
+            if (buyLink && buyLink.classList.contains('buy-link')) {
+                buyLink.classList.add('visible');
+            }
+            
+            navigator.clipboard.writeText(coupon).then(() => {
+                showToast();
+                button.textContent = 'Copied!';
+                button.style.backgroundColor = '#5A9C78'; // Green color for success
+                button.disabled = true;
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+                // Even if copying fails, the user can now see the "Buy on Amazon" link.
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4');
+            }, 2500);
+        }
+    </script>
+
+</body>
+</html>
+
+
